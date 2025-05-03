@@ -35,6 +35,16 @@ jobs:
     
     # - name: Build the Docker Image
     #   run: docker build ./Shopping/Shopping.Client/ -t lucasmontagnani/shoppingapp:latest
+
+    - name: Deploy to Azure Web App
+      uses: azure/webapps-deploy@v2
+      with:
+        app-name: shoppingappweb
+        publish-profile: ${{ secrets.AZURE_PUBLISH_PROFILE }}
+        
+        
+        
+      
     
     # - name: Push the Docker Image to DockerHub
     #   run: docker push lucasmontagnani/shoppingapp:latest
