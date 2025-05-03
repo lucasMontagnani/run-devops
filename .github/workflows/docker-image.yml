@@ -1,11 +1,11 @@
 name: Build Docker Image and Push to DockerHub (CI)
 
 on:
+  workflow_dispatch:
   push:
     branches: [ "main" ]
   pull_request:
     branches: [ "main" ]
-  workflow_dispatch:
 
 jobs:
 
