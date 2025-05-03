@@ -25,17 +25,17 @@ jobs:
     # - name: Login to DockerHub
     #   run: docker login -u ${{ secrets.DOCKERHUB_USERNAME }} -p ${{ secrets.DOCKERHUB_TOKEN }}    
     
+    - name: Build and Push Docker Image
+      uses: docker/build-push-action@v6
+      with:
+        context: Shopping/
+        file: Shopping/Shopping.Client/Dockerfile
+        push: true
+        tags: lucasmontagnani/shoppingapp:latest  
+    
+    # - name: Build the Docker Image
+    #   run: docker build ./Shopping/Shopping.Client/ -t lucasmontagnani/shoppingapp:latest
+    
     # - name: Push the Docker Image to DockerHub
-    #   uses: docker/build-push-action@v6
-    #   with:
-    #     push: true
-    #     tags: lucasmontagnani/shoppingapp:latest
-    #     context: Shopping/Shopping.Client/
-    #     file: Shopping/Shopping.Client/Dockerfile    
-    
-    - name: Build the Docker Image
-      run: docker build ./Shopping/Shopping.Client/ -t lucasmontagnani/shoppingapp:latest
-    
-    - name: Push the Docker Image to DockerHub
-      run: docker push lucasmontagnani/shoppingapp:latest
+    #   run: docker push lucasmontagnani/shoppingapp:latest
       
