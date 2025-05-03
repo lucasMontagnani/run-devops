@@ -1,0 +1,51 @@
+name: Build Docker Image and Push to DockerHub (CI)
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+
+  build-and-deploy:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: checkout the repository
+      uses: actions/checkout@v4
+    
+    - name: Login to DockerHub
+      uses: docker/login-action@v3
+      with: 
+        username: ${{ secrets.DOCKERHUB_USERNAME }}
+        password: ${{ secrets.DOCKERHUB_TOKEN }}    
+    # - name: Login to DockerHub
+    #   run: docker login -u ${{ secrets.DOCKERHUB_USERNAME }} -p ${{ secrets.DOCKERHUB_TOKEN }}    
+    
+    - name: Build and Push Docker Image
+      uses: docker/build-push-action@v6
+      with:
+        context: Shopping/
+        file: Shopping/Shopping.Client/Dockerfile
+        push: true
+        tags: lucasmontagnani/shoppingapp:latest  
+    
+    # - name: Build the Docker Image
+    #   run: docker build ./Shopping/Shopping.Client/ -t lucasmontagnani/shoppingapp:latest
+
+    - name: Deploy to Azure Web App
+      uses: azure/webapps-deploy@v2
+      with:
+        app-name: shoppingappweb
+        publish-profile: ${{ secrets.AZURE_PUBLISH_PROFILE }}
+        
+        
+        
+      
+    
+    # - name: Push the Docker Image to DockerHub
+    #   run: docker push lucasmontagnani/shoppingapp:latest
+      
