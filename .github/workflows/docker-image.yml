@@ -17,9 +17,6 @@ jobs:
     - name: checkout the repository
       uses: actions/checkout@v4
     
-    #- name: Build the Docker Image
-    #  run: docker build . --file Dockerfile --tag lucasmontagnani/shoppingapp:latest
-    
     - name: Login to DockerHub
       uses: docker/login-action@v3
       with: 
@@ -28,13 +25,17 @@ jobs:
     # - name: Login to DockerHub
     #   run: docker login -u ${{ secrets.DOCKERHUB_USERNAME }} -p ${{ secrets.DOCKERHUB_TOKEN }}    
     
-    - name: Push the Docker Image to DockerHub
-      uses: docker/build-push-action@v6
-      with:
-        push: true
-        tags: lucasmontagnani/shoppingapp:latest
-        context: .
-        #file: Shopping/Shopping.Client/Dockerfile        
     # - name: Push the Docker Image to DockerHub
-    #   run: docker push lucasmontagnani/shoppingapp:latest
+    #   uses: docker/build-push-action@v6
+    #   with:
+    #     push: true
+    #     tags: lucasmontagnani/shoppingapp:latest
+    #     context: Shopping/Shopping.Client/
+    #     file: Shopping/Shopping.Client/Dockerfile    
+    
+    - name: Build the Docker Image
+      run: docker build ./Shopping/Shopping.Client/ -t lucasmontagnani/shoppingapp:latest
+    
+    - name: Push the Docker Image to DockerHub
+      run: docker push lucasmontagnani/shoppingapp:latest
       
