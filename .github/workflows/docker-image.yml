@@ -33,7 +33,7 @@ jobs:
       with:
         push: true
         tags: lucasmontagnani/shoppingapp:latest
-        #context: Shopping/Shopping.Client/
+        context: Shopping/Shopping.Client/
         file: Shopping/Shopping.Client/Dockerfile        
     # - name: Push the Docker Image to DockerHub
     #   run: docker push lucasmontagnani/shoppingapp:latest
