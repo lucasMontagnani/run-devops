@@ -31,7 +31,7 @@ jobs:
     - name: Push the Docker Image to DockerHub
       uses: docker/build-push-action@v6
       with:
-        context: Shopping/Shopping.Client
+        context: Shopping/Shopping.Client/
         push: true
         tags: lucasmontagnani/shoppingapp:latest
     # - name: Push the Docker Image to DockerHub
