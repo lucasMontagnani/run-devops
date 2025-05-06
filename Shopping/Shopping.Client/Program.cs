@@ -3,8 +3,8 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddHttpClient("ShoppingAPIClient", client =>
 {
-    client.BaseAddress = new Uri("http://localhost:5000/"); // Shopping.API url     
-    //client.BaseAddress = new Uri(builder.Configuration["ShoppingAPIUrl"]!);
+    //client.BaseAddress = new Uri("http://localhost:5000/"); // Shopping.API url     
+    client.BaseAddress = new Uri(builder.Configuration["ShoppingAPIUrl"]!);
 });
 
 builder.Services.AddControllersWithViews();
