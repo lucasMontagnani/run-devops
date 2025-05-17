@@ -22,6 +22,7 @@ jobs:
       with: 
         username: ${{ secrets.DOCKERHUB_USERNAME }}
         password: ${{ secrets.DOCKERHUB_TOKEN }}    
+    ## LOGIN BY RAW COMMANDS
     # - name: Login to DockerHub
     #   run: docker login -u ${{ secrets.DOCKERHUB_USERNAME }} -p ${{ secrets.DOCKERHUB_TOKEN }}    
     
@@ -32,20 +33,15 @@ jobs:
         file: Shopping/Shopping.Client/Dockerfile
         push: true
         tags: lucasmontagnani/shoppingapp:latest  
-    
+    ## BUILD AND PUSH BY RAW COMMANDS
     # - name: Build the Docker Image
     #   run: docker build ./Shopping/Shopping.Client/ -t lucasmontagnani/shoppingapp:latest
-
-    - name: Deploy to Azure Web App
-      uses: azure/webapps-deploy@v2
-      with:
-        app-name: shoppingappweb
-        publish-profile: ${{ secrets.AZURE_PUBLISH_PROFILE }}
-        
-        
-        
-      
-    
     # - name: Push the Docker Image to DockerHub
     #   run: docker push lucasmontagnani/shoppingapp:latest
-      
+
+    ## 
+    # - name: Deploy to Azure Web App
+    #   uses: azure/webapps-deploy@v2
+    #   with:
+    #     app-name: shoppingappweb
+    #     publish-profile: ${{ secrets.AZURE_PUBLISH_PROFILE }}
